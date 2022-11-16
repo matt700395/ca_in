@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe In Art</title>
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/cafe.css">
+</head>
+<body>
+    <header>
+        <h1 class="title">Cafe in Art</h1>
+        <h3>원하는 작품을 무료로 전시해보세요! </h3>
+    </header>
+    <section>
+        <!-- 목록 -->
+        <article id="artist-container">
+            <div class="artist-item">
+                <button><img src="https://picsum.photos/300/400​" class="img"></button>
+                <div>
+                    <span class="name">작가명</span>
+                    <span class="size"></span>
+                </div>
+            </div>
+            <div class="artist-item">
+                <button><img src="https://picsum.photos/300/400​" class="img"></button>
+                <div>
+                    <span class="name">작가명</span>
+                    <span class="size"></span>
+                </div>
+            </div>
+            <div class="artist-item">
+                <button><img src="https://picsum.photos/300/400​" class="img"></button>
+                <div>
+                    <span class="name">작가명</span>
+                    <span class="size"></span>
+                </div>
+            </div>
+            <div class="artist-item">
+                <button><img src="https://picsum.photos/300/400​" class="img"></button>
+                <div>
+                    <span class="name">작가명</span>
+                    <span class="size"></span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 선택 시 -->
+        <form id="form">
+            <article id="detail">
+                <div class="info">
+                    <div class="input-container">
+                        <span>카페명</span>
+                        <input type="text">
+                    </div>
+                    <div class="input-container">
+                        <span>사장님 이름</span>
+                        <input type="text">
+                    </div>
+                    <div class="input-container">
+                        <span>카페 주소</span>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="imgs">
+                    <div class="input-img">
+                        <span>전시 가능 장소 사진 업로드</span>
+                        <div id="input-container"> 
+                            <input type="file" accept="image/*" multiple id="img_input"/>
+                        </div>
+                    </div>
+                    <div id="img-samples">
+                        <div>
+                            <img src="">
+                        </div>
+                    </div>
+                    <div class="submit-box">
+                        <input type="hidden" id="img-data">
+                        <button type="button" id="submit">등록 완료하기</button>
+                    </div>
+                </div>
+            </article>
+        </form>
+    </section>
+</body>
+
+<script>
+
+    
+    const items = document.getElementsByClassName("artist-item");
+    for (let i=0; i<items.length ; i++ ) {
+        items[i].addEventListener("click", function(idx = i) {
+            document.getElementById("artist-container").style.display = "none";
+            document.getElementById("form").style.display = "flex";
+        })
+    }
+
+
+    document.getElementById("img_input").addEventListener("change", e => {
+        readMultipleImage(e.target);
+    });
+
+    function readMultipleImage(input) {
+        const fileArr = Array.from(input.files);
+
+        fileArr.forEach((file, index) => {
+            const reader = new FileReader();
+
+            const $container = document.getElementById("img-samples");
+
+            const $img = document.createElement("img");
+
+            $img.classList.add("image");
+            $img.alt = file.name;
+
+            reader.onload = e => {
+                $img.src = e.target.result;
+                imgs.push(file.src);
+                console.log(imgs);
+                document.getElementById("img-data").value = imgs;
+            }
+            
+            $container.appendChild($img);
+            
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+</html>

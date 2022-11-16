@@ -1,0 +1,85 @@
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#artist-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.artist-item button {
+    width: 20rem;
+    height: 10rem;
+    margin: 0.5rem 1rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.artist-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#form {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container input {
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+}
+
+.input-container {
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 70%;
+}
+
+.input-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-img input {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.submit-box {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#img-samples {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 3rem;
+}
+
+.image {
+    width: 20rem;
+    height: 10rem;
+    margin: 1rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe In Art</title>
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/artist.css">
+</head>
+<body>
+    <header>
+        <h1 class="title">Cafe in Art</h1>
+    </header>
+    <section>
+            <form id="form">
+                <article>
+                    <div id="name-container">
+                        <span class="artist-name">작가명</span>
+                        <input type="text" class="input-name" id="name"/>
+                    </div>
+                    <div id="input-container"> 
+                        <input type="file" accept="image/*" multiple id="img_input"/>
+                    </div>
+                    <div id="uploaded">
+                        <span class="artist-name" id="artist-name">작가명</span>
+                        <button type="button" id="edit">수정</button>
+                    </div>  
+                    <div id="img-samples">
+                        <div>
+                            <img src="">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="hidden" id="img-data">
+                        <button type="button" id="submit">등록 완료하기</button>
+                    </div>
+                </article>
+            </form>
+    </section>
+</body>
+
+<script type="text/javascript" src="./data.json"></script>
+
+<script>
+    var jsonData;
+    var imgs = [];
+
+    window.onload = function() {
+        jsonData = JSON.parse(JSON.stringify(data));
+        console.log("data");
+        console.log(jsonData);
+
+        function onSubmit() {
+            const name = document.getElementById("name").value;
+            jsonData.push({"name": name, "imgs": imgs});
+            console.log(jsonData);
+
+            document.getElementById("artist-name").innerHTML = name;
+            document.getElementById("uploaded").style.display = "flex";
+            document.getElementById("name-container").style.display = "none";
+            document.getElementById("input-container").style.display = "none";
+
+            event.preventDefault();
+            return false; // 새로고침 방지 
+        }   
+
+        document.getElementById("submit").addEventListener("click", onSubmit);
+        document.getElementById("edit").addEventListener("click", function() {
+            document.getElementById("uploaded").style.display = "none";
+            document.getElementById("name-container").style.display = "flex";
+            document.getElementById("input-container").style.display = "flex";
+        })
+    }
+
+    document.getElementById("img_input").addEventListener("change", e => {
+        readMultipleImage(e.target);
+    });
+
+    function readMultipleImage(input) {
+        const fileArr = Array.from(input.files);
+
+        fileArr.forEach((file, index) => {
+            const reader = new FileReader();
+
+            const $container = document.getElementById("img-samples");
+
+            const $img = document.createElement("img");
+
+            $img.classList.add("image");
+            $img.alt = file.name;
+
+            reader.onload = e => {
+                $img.src = e.target.result;
+                imgs.push(file.src);
+                console.log(imgs);
+                document.getElementById("img-data").value = imgs;
+            }
+            
+            $container.appendChild($img);
+            
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+</html>
